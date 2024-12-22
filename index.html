@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Flight Data</title>
+</head>
+
+<body>
+    <h1>Flight Data</h1>
+    <table border="1">
+        <tr>
+            <th>Departure</th>
+            <th>Destination</th>
+            <th>Duration</th>
+            <th>Price</th>
+        </tr>
+        {% for flight in flights %}
+        <tr>
+            <td>{{ flight[0] }}</td>
+            <td>{{ flight[1] }}</td>
+            <td>{{ flight[2] }}</td>
+            <td>{{ flight[3] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="/add_flight">Add Flight</a>
+</body>
+
+</html>
