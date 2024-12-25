@@ -1,3 +1,6 @@
+from collections import defaultdict
+from heapq import heappop, heappush
+
 flights = [("oslo", "lofoton", 185, 155), ("lofoton", "oslo", 175, 144), \
            ("oslo", "tromso", 115, 89), ("tromso", "oslo", 120, 89), \
            ("tromso", "lofoton", 135, 210), ("lofoton", "tromso",120, 295), \
@@ -10,13 +13,14 @@ flights = [("oslo", "lofoton", 185, 155), ("lofoton", "oslo", 175, 144), \
            ("oslo", "longyearbyen", 260, 142), ("longyearbyen", "oslo", 265, 124),\
            ]
 
-from collections import defaultdict
-graph = defaultdict(list)
-for start, end, duration, price in flights:
-  graph[start].append((duration, end))
-print(graph)
+def build_graph(flights):
+  graph = defaultdict(list)
+  for start, end, duration, price in flights:
+    graph[start].append((duration, end))
+  return graph
+  #print(graph)
 
-from heapq import heappop, heappush
+
 
 def shortest_path_to_visit_all_nodes(graph, start):
     n = len(graph)  # Number of nodes
@@ -61,14 +65,22 @@ def shortest_path_to_visit_all_nodes(graph, start):
     return distance, [start] + path
 
 path = ['oslo', 'lofoton', 'tromso', 'longyearbyen', 'stockholm', 'oslo']
-total = 0
-curr = 'oslo'
-for city in path[1:]:
-  for cost, neighbor in graph[curr]:
-    if neighbor == city:
-      total += cost
-      print(f"{curr}->{city}, cost={cost}")
-      curr = city
-      break
-print(curr == "oslo")
-print(total)
+
+graph = build_graph(flights)
+def shortest_flights_for_path(path, graph):
+  total = 0
+  curr = 'oslo'
+  res = ""
+  for city in path[1:]:
+    for cost, neighbor in graph[curr]:
+      if neighbor == city:
+        total += cost
+        #print(f"{curr}->{city}, cost={cost}")
+        res += f"{curr}->{city}, cost={cost}<br>"
+        curr = city
+        break
+  #print(f"total cost is {total}")
+  res += f"total cost is {total}<br>"
+  return res
+# print(curr == "oslo")
+# print(total)

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Flights</title>
+    <script>
+        function addFlightRow() {
+            const container = document.getElementById('flights-container');
+            const flightRow = document.createElement('div');
+            flightRow.innerHTML = `
+                <input type="text" name="departure" placeholder="Departure" required>
+                <input type="text" name="destination" placeholder="Destination" required>
+                <input type="number" name="distance" placeholder="Distance" required>
+                <input type="number" name="price" placeholder="Price" required>
+                <button type="button" onclick="this.parentElement.remove()">Remove</button>
+                <br>`;
+            container.appendChild(flightRow);
+        }
+    </script>
+</head>
+<body>
+    <h1>Add Flight Details</h1>
+    <form method="post" action="/save_flights">
+        <div id="flights-container">
+            <!-- Flight rows will be added here dynamically -->
+        </div>
+        <button type="button" onclick="addFlightRow()">Add Flight</button>
+        <br><br>
+        <button type="submit">Save Flights</button>
+    </form>
+    <a href="/">Back to Home</a>
+</body>
+</html>
