@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flight Result</title>
+</head>
+<body>
+    <h1>Cheapest Flight</h1>
+    <table border="1">
+        <tr>
+            <th>Departure</th>
+            <th>Destination</th>
+            <th>Distance</th>
+            <th>Price</th>
+        </tr>
+        <tr>
+            <td>{{ flight[0] }}</td>
+            <td>{{ flight[1] }}</td>
+            <td>{{ flight[2] }}</td>
+            <td>{{ flight[3] }}</td>
+        </tr>
+    </table>
+    <a href="/find_flight">Search Another Flight</a>
+    <a href="/">Back to Flight List</a>
+</body>
+</html>

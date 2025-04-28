@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City Name Input</title>
+    <script>
+        function addCityInput() {
+            const container = document.getElementById('cities-container');
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.name = 'city';
+            input.placeholder = 'Enter a city name';
+            container.appendChild(input);
+            container.appendChild(document.createElement('br'));
+        }
+    </script>
+</head>
+<body>
+    <h1>Enter City Names</h1>
+    <form method="POST">
+        <div id="cities-container">
+            <input type="text" name="city" placeholder="Enter a city name"><br>
+        </div>
+        <button type="button" onclick="addCityInput()">Add Another City</button>
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if result %}
+        <h2>Processed Cities</h2>
+        <ul>
+            {{ result | safe}}
+        </ul>
+    {% endif %}
+</body>
+</html>
