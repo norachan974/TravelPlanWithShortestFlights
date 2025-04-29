@@ -1,5 +1,6 @@
 from collections import defaultdict
 from heapq import heappop, heappush
+import pytest
 
 flights = [("oslo", "lofoton", 185, 155), ("lofoton", "oslo", 175, 144), \
            ("oslo", "tromso", 115, 89), ("tromso", "oslo", 120, 89), \
@@ -14,11 +15,18 @@ flights = [("oslo", "lofoton", 185, 155), ("lofoton", "oslo", 175, 144), \
            ]
 
 def build_graph(flights):
+  if not isinstance(flights, list):
+    raise TypeError(f"Expected a list, but got {type(flights).__name__}")
+  for item in flights:
+     if not isinstance(item, tuple):
+        raise TypeError(f"Expected a tuple, but got {type(item).__name__}")
+     
   graph = defaultdict(list)
   for start, end, duration, price in flights:
     graph[start].append((duration, end))
   return graph
   #print(graph)
+
 
 
 
@@ -84,3 +92,4 @@ def shortest_flights_for_path(path, graph):
   return res
 # print(curr == "oslo")
 # print(total)
+#def test_shortest_flights_for_path():
