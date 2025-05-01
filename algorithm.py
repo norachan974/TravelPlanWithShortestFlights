@@ -1,6 +1,6 @@
 from collections import defaultdict
 from heapq import heappop, heappush
-import pytest
+
 
 flights = [("oslo", "lofoton", 185, 155), ("lofoton", "oslo", 175, 144), \
            ("oslo", "tromso", 115, 89), ("tromso", "oslo", 120, 89), \
@@ -75,9 +75,16 @@ def shortest_path_to_visit_all_nodes(graph, start):
 path = ['oslo', 'lofoton', 'tromso', 'longyearbyen', 'stockholm', 'oslo']
 
 graph = build_graph(flights)
+
 def shortest_flights_for_path(path, graph):
+  if not isinstance(path, list):
+     raise TypeError(f"Expected a list, but got {type(path).__name__}")
+  for item in path:
+     if not isinstance(item, str):
+        raise TypeError(f"Expected a string, but got {type(item).__name__}")
+     
   total = 0
-  curr = 'oslo'
+  curr = path[0]
   res = ""
   for city in path[1:]:
     for cost, neighbor in graph[curr]:
@@ -93,3 +100,13 @@ def shortest_flights_for_path(path, graph):
 # print(curr == "oslo")
 # print(total)
 #def test_shortest_flights_for_path():
+
+path = ['JFK', 'ORD', "JFK"]
+flights = [
+    ("JFK", "LAX", 7, 300),
+    ("JFK", "ORD", 2, 150),
+    ("ORD", "LAX", 4, 200),
+    ("ORD", "JFK", 2, 220)
+]
+graph = build_graph(flights)
+print(shortest_flights_for_path(path, graph))
