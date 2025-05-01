@@ -22,3 +22,35 @@ def test_build_graph_sad_case():
     else:
         assert False, "Expected TypeError was not raised"
 
+def test_shortest_flights_for_path_happy_case():
+    path = ['JFK', 'ORD','JFK']
+    flights = [
+        ("JFK", "LAX", 7, 300),
+        ("JFK", "ORD", 2, 150),
+        ("ORD", "LAX", 4, 200),
+        ("ORD", "JFK", 2, 220)
+    ]
+    graph = build_graph(flights)
+    assert shortest_flights_for_path(path, graph) == "JFK->ORD, cost=2<br>ORD->JFK, cost=2<br>total cost is 4<br>"
+
+def test_shortest_flights_for_path_sad_case():
+    path = [1]
+    flights = [
+        ("JFK", "LAX", 7, 300),
+        ("JFK", "ORD", 2, 150),
+        ("ORD", "LAX", 4, 200),
+        ("ORD", "JFK", 2, 220)
+    ]
+    graph = build_graph(flights)
+    try:
+        shortest_flights_for_path(path, graph)
+    except TypeError as e:
+        assert str(e) == "Expected a string, but got int"
+    else:
+        assert False, "Expected TypeError was not raised"
+
+
+
+
+
+
